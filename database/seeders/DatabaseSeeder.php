@@ -4,9 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
-use App\Models\User;
-use App\Models\Quiz;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,8 +17,8 @@ class DatabaseSeeder extends Seeder
         
        
 
-        $this->call(QuizSeeder::class);
-        $this->call(UserSeeder::class);
+        $this->call([QuizSeeder::class,UserSeeder::class]);
+        
 
       
     }
