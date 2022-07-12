@@ -171,7 +171,9 @@ return [
         'email' => 'E-posta',
         'phone' => 'Telefon Numarası',
         'topic' => 'Konu',
-        'message' => 'Mesaj'
+        'message' => 'Mesaj',
+        'title' => 'Başlık',
+        'description' => 'Açıklama',
     ],
 
 ];
