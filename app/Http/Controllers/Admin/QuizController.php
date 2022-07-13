@@ -17,7 +17,7 @@ class QuizController extends Controller
      */
     public function index()
     {
-        $quizzes= Quiz::paginate(5);
+        $quizzes= Quiz::withCount('questions')->paginate(5);
         return view('admin.quiz.list',compact('quizzes'));
     }
 
@@ -90,6 +90,6 @@ class QuizController extends Controller
     {
        $quiz= Quiz::find($id) ?? abort(404,'quiz bulunamadı');
        $quiz->delete();
-       return redirect()->route('quizzes.index')->withSuccess('Quiz Başarıyla Silindi');
+       return redirect()->back()->withSuccess('Quiz Başarıyla Silindi');
     }
 }

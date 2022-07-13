@@ -17,6 +17,15 @@
             <textarea name="description" class="form-control" rows="4">{{old('description')}}</textarea>
         </div>
         <br>
+        <div class="form-group">
+            <label>Quiz Durumu</label>
+            <select name="status" class="form-control">
+                <option value="publish">Aktif</option>
+                <option value="draft">Taslak</option>
+                <option value="passive">Pasif</option>
+            </select>
+        </div>
+        <br>
         Bitiş Tarihi olacak mı?&nbsp; <input type="checkbox" {{old('finished_at') ? 'checked' : ''}}  id="check"><br>
 
         <div class="form-group {{old('finished_at') ? 'd-block' : ''}}" style="display: none" id="date">
@@ -26,7 +35,7 @@
         </div>
         <br>
         <div class="form-group">
-            <button type="submit" class="btn btn-success btn-sm w-100 py-1 btn-block"> Quiz Oluştur</button>
+            <button type="submit" class="btn btn-primary btn-sm w-100 py-1 btn-block"> Quiz Oluştur</button>
         </div>
        </form>
        </div>
