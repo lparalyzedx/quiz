@@ -16,7 +16,7 @@
         <div class="form-group">
             <label>Fotograf</label>
             <img src="{{asset($question->image)}}" width="120" alt="">
-            <input type="file" name="image" class="form-control">
+            <input type="file" name="image" value="{{$question->image}}" class="form-control">
         </div>
         <br>
         <div class="row">

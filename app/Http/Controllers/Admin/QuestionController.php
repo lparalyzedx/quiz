@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Quiz;
 use App\Http\Requests\QuestionCreateRequest;
 use App\Http\Requests\QuestionUpdateRequest;
+use App\Models\Question;
 use Illuminate\Support\Str;
 
 class QuestionController extends Controller
@@ -89,13 +90,16 @@ class QuestionController extends Controller
     {
         if($request->hasFile('image')){
             $imageName= Str::slug($request->question).'.'.$request->image->getClientOriginalExtension();
+            $fileWithUpload= 'uploads/'.$imageName;
             $request->image->move(public_path('uploads'),$imageName);
             $request->merge([
-                'image' => 'uploads/'.$imageName,
+                'image' => $fileWithUpload
             ]);
         }
-        Quiz::find($quiz_id)->questions()->whereId($question_id)->update($request->except(['_method','_token']));
 
+        Quiz::find($quiz_id)->questions()->whereId($question_id)->first()->update($request->post());
+
+        
         return redirect()->route('questions.index',$quiz_id)->withSuccess('Soru Başarıyla Güncellendi');
     }
 
