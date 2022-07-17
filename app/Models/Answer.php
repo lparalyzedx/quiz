@@ -5,13 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Question extends Model
+class Answer extends Model
 {
     use HasFactory;
     protected $guarded= [];
-
-    public function myAnswer()
-    {
-        return $this->hasOne('App\Models\Answer')->where('user_id',auth()->user()->id);
-    }
+    public  $timestamps= false;
 }

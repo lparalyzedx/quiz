@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Question extends Model
+class Result extends Model
 {
     use HasFactory;
     protected $guarded= [];
 
-    public function myAnswer()
+    public function user()
     {
-        return $this->hasOne('App\Models\Answer')->where('user_id',auth()->user()->id);
+      return  $this->belongsTo('App\Models\User','user_id','id');
     }
 }

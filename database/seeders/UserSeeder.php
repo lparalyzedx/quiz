@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      * @return void
      */
     public function run()
-    {   User::truncate();
+    {   
 
         User::create([
             'name' => 'Cafer Güvenc',
@@ -26,6 +26,6 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
           ]);
 
-        User::factory(5)->create();
+        User::factory(10)->create();
     }
 }
