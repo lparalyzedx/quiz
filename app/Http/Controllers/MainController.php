@@ -11,8 +11,11 @@ class MainController extends Controller
 {
     public function dashboard()
     {
-        $quizzes = Quiz::where('status', 'publish')->withCount('questions')->paginate(4);
-        return view('dashboard', compact('quizzes'));
+        $quizzes = Quiz::where('status', 'publish')->where(function($query){
+            $query->whereNull('finished_at')->orWhere('finished_at','>',now());
+        })->withCount('questions')->paginate(4);
+        $results=  auth()->user()->results;
+        return view('dashboard', compact('quizzes','results'));
     }
 
     public function quiz_detail($slug)
@@ -23,7 +26,7 @@ class MainController extends Controller
 
     public function quiz($slug)
     {
-       $quiz= Quiz::whereSlug($slug)->with('questions.myAnswer')->first() ?? abort(404, 'quiz bulunamadı');
+       $quiz= Quiz::whereSlug($slug)->with('questions.myAnswer','my_result')->first() ?? abort(404, 'quiz bulunamadı');
         
         if($quiz->my_result){
             return view('result',compact('quiz'));

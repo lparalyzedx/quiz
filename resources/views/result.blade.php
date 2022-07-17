@@ -4,8 +4,11 @@
     <div class="card">
         <div class="card-body">
             <div class="alert alert-light">
+                <h2>Puan: {{$quiz->my_result->point}}</h2>
+            </div>
+            <div class="alert alert-light">
+                <i class="fa fa-square"></i> İşaretlediğin Şık <br>
                 <i class="fa fa-check text-success"></i> Doğru Cevap <br>
-                <i class="fa fa-square"></i> Seçtiğin Şık <br>
                 <i class="fa fa-times text-danger"></i> Yanlış Cevap
             </div>
                     @foreach ($quiz->questions as $question)
@@ -20,7 +23,9 @@
                     @if($question->image)
                     <img src="{{asset($question->image)}}"  style="width: 50%; margin:5px 0;" alt="">
                     @endif
-                    <div class="form-check">
+                    <br>
+                    <small>Bu soruya <strong>%{{$question->true_percent}}</strong> oranında doğru cevap verildi</small>
+                    <div class="form-check mt-2">
                         @if('answer1' ===$question->correct_answer)
                         <i class='fa fa-check text-success'></i>
                         @elseif('answer1' === $question->myanswer->answer)

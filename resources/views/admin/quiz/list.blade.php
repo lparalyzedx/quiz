@@ -45,11 +45,17 @@
                             <td>
                                 @switch($quiz->status)
                                     @case('publish')
-                                        <span class="badge bg-success">Aktif</span>
+                                        @if($quiz->finished_at && $quiz->finished_at>now())
+                                           <span class="badge bg-success">Aktif</span>
+                                        @elseif(!$quiz->finished_at)
+                                           <span class="badge bg-success">Aktif</span>
+                                        @else
+                                          <span class="badge bg-danger">Zamanı doldu</span>
+                                        @endif
                                     @break
 
                                     @case('draft')
-                                        <span class="badge bg-warning">Taslak</span>
+                                        <span class="badge bg-warning text-dark">Taslak</span>
                                     @break
 
                                     @case('passive')
@@ -64,6 +70,9 @@
                                 </span>
                             </td>
                             <td>
+                                <a href="{{route('quizzes.shower',$quiz->id)}}" class="btn btn-sm btn-secondary">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
                                 <a href="{{ route('questions.index', $quiz->id) }}" class="btn btn-sm btn-warning"
                                     title="sorular"><i class="fas fa-question"></i></a>
                                 <a href="{{ route('quizzes.edit', $quiz->id) }}" class="btn btn-sm btn-primary"

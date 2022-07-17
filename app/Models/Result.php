@@ -14,4 +14,9 @@ class Result extends Model
     {
       return  $this->belongsTo('App\Models\User','user_id','id');
     }
+
+    public function quiz()
+    {
+      return $this->belongsTo('App\Models\Quiz');
+    }
 }

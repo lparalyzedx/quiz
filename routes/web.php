@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// KULLANICI PANELİ
 Route::group(['middleware' => 'auth'],function () {
     Route::get('/panel',[MainController::class,'dashboard'])->name('dashboard');
     Route::get('quiz/detay/{slug}',[MainController::class,'quiz_detail'])->name('quiz.detail');
@@ -27,7 +28,9 @@ Route::group(['middleware' => 'auth'],function () {
     Route::post('quiz/{slug}/result',[MainController::class,'result'])->name('quiz.result');
 });
 
+// ADMIN PANELI
 Route::group(['middleware' => ['auth','isAdmin'],'prefix' => 'admin'],function(){
+       Route::get('quiz/{id}',[QuizController::class,'show'])->name('quizzes.shower');
        Route::get('quizzes/{id}',[QuizController::class,'destroy'])->whereNumber('id')->name('quizzes.destroy');
        Route::resource('quizzes', QuizController::class);
        Route::get('quiz/{quiz_id}/questions/{id}',[QuestionController::class,'destroy'])->whereNumber('id')->name('questions.destroy');
